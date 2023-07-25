@@ -1,0 +1,8 @@
+.hover-and-scale:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
+.hover-and-scale:active {
+    transform: scale(.95);
+}
