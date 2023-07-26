@@ -3,7 +3,7 @@ import { AiOutlineSend } from "react-icons/ai";
 
 const Newsletter = () => {
   return (
-    <div className="w-full h-[50vh] bg-biceBlue text-white p-3 flex flex-col justify-center items-center font-urbanist">
+    <section className="w-full h-[50vh] bg-biceBlue text-white p-3 flex flex-col justify-center items-center font-urbanist">
       <h1 className="text-4xl font-bold tracking-wider my-5">
         <label htmlFor="email">Newsletter</label>
       </h1>
@@ -18,7 +18,7 @@ const Newsletter = () => {
           <AiOutlineSend className="text-4xl px-2" />
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 
