@@ -9,6 +9,7 @@ export default {
     colors: {
       lightBlue: "#5d3ebc",
       darkBlue: "#4c3398",
+      biceBlue: "#2D6A8B",
       white: "#fff",
       black: "#000",
       yellow: "#ffd300"
