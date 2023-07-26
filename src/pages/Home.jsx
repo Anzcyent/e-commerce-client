@@ -4,7 +4,7 @@ import { HomeContainer } from "../containers";
 
 const Home = () => {
   return (
-    <main>
+    <main className="flex flex-col h-[100vh]">
       <Navbar />
       <Announcement />
       <HomeContainer />

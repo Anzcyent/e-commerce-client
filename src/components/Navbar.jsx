@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className="w-full font-urbanist p-3 bg-darkBlue text-white flex items-center justify-evenly relative">
       <h1 className="font-bold lg:w-1/6 w-1/2 flex justify-center sm:text-2xl text-lg">
-        LOGO
+        ShopEazy
       </h1>
 
       <div className="w-4/6 flex justify-center items-center text-black lg:flex hidden">
