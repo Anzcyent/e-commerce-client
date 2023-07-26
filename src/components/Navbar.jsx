@@ -32,7 +32,7 @@ const Navbar = () => {
 
       {/* RESPONSIVE MENU */}
       {openMenu && (
-        <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col p-3 text-sm">
+        <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col p-3 text-sm flip">
           <a href="#" className="mb-5 hover-and-scale">
             REGISTER
           </a>
