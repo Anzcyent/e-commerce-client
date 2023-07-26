@@ -6,3 +6,20 @@
 .hover-and-scale:active {
   transform: scale(0.95);
 }
+
+.home-products::-webkit-scrollbar {
+  width: 5px;
+}
+
+.home-products::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+.home-products::-webkit-scrollbar-thumb {
+  background: #4c3398;
+}
+
+.home-products::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
