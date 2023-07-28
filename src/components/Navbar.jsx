@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FcSearch } from "react-icons/fc";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
+import Badge from "./Badge";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -21,14 +22,23 @@ const Navbar = () => {
         </button>
       </div>
 
-      <div className="lg:flex hidden w-1/6 justify-center">
+      <div className="lg:flex hidden w-1/6 justify-center items-center">
         <a href="#" className="mr-5">
           REGISTER
         </a>
-        <a href="#">LOGIN</a>
+        <a href="#" className="mr-5">
+          LOGIN
+        </a>
+        <a href="#" className="relative">
+          <AiOutlineShoppingCart />
+          <Badge>5</Badge>
+        </a>
       </div>
 
-      <AiOutlineMenu onClick={() => setOpenMenu(prev => !prev)} className="w-1/2 lg:hidden text-lg hover-and-scale" />
+      <AiOutlineMenu
+        onClick={() => setOpenMenu((prev) => !prev)}
+        className="w-1/2 lg:hidden text-lg hover-and-scale"
+      />
 
       {/* RESPONSIVE MENU */}
       {openMenu && (
@@ -36,8 +46,12 @@ const Navbar = () => {
           <a href="#" className="mb-5 hover-and-scale">
             REGISTER
           </a>
-          <a href="#" className="hover-and-scale">
+          <a href="#" className="mb-5 hover-and-scale">
             LOGIN
+          </a>
+          <a href="#" className="relative">
+            <AiOutlineShoppingCart />
+            <Badge>5</Badge>
           </a>
         </div>
       )}
