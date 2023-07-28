@@ -1,11 +1,11 @@
 import React from 'react'
-import { Home, Login } from './pages'
+import { Home, Login, Register } from './pages'
 import "./App.css"
 
 const App = () => {
   return (
     <>
-      <Login />
+      <Register />
     </>
   )
 }
