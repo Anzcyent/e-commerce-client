@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FcSearch } from "react-icons/fc";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
-import Badge from "./Badge";
+import { Badge } from "../components";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -23,16 +24,16 @@ const Navbar = () => {
       </div>
 
       <div className="lg:flex hidden w-1/6 justify-center items-center">
-        <a href="#" className="mr-5">
+        <Link to="/register" className="mr-5 hover-and-scale">
           REGISTER
-        </a>
-        <a href="#" className="mr-5">
+        </Link>
+        <Link to="/login" className="mr-5 hover-and-scale">
           LOGIN
-        </a>
-        <a href="#" className="relative">
+        </Link>
+        <Link to="/cart" className="relative hover-and-scale">
           <AiOutlineShoppingCart />
           <Badge>5</Badge>
-        </a>
+        </Link>
       </div>
 
       <AiOutlineMenu
@@ -43,16 +44,16 @@ const Navbar = () => {
       {/* RESPONSIVE MENU */}
       {openMenu && (
         <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col p-3 text-sm flip">
-          <a href="#" className="mb-5 hover-and-scale">
+          <Link to="/register" className="mb-5 hover-and-scale">
             REGISTER
-          </a>
-          <a href="#" className="mb-5 hover-and-scale">
+          </Link>
+          <Link to="/login" className="mb-5 hover-and-scale">
             LOGIN
-          </a>
-          <a href="#" className="relative">
+          </Link>
+          <Link to="/cart" className="relative">
             <AiOutlineShoppingCart />
             <Badge>5</Badge>
-          </a>
+          </Link>
         </div>
       )}
     </nav>

@@ -1,10 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProductContainer = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="grow p-3 flex flex-col font-urbanist">
       <div className="w-full flex md:justify-start justify-center">
-        <button className="bg-biceBlue text-white px-3 py-1 hover-and-scale">Return Shopping</button>
+        <button
+          onClick={() => navigate("/")}
+          className="bg-biceBlue text-white px-3 py-1 hover-and-scale"
+        >
+          Return Shopping
+        </button>
       </div>
       <div className="w-full flex flex-col items-center md:mt-0 mt-5">
         <img
