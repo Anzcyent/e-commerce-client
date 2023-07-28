@@ -1,11 +1,16 @@
 import React from "react";
-import { CategoriesMenu, HomeProducts } from "../components";
+import {
+  CategoriesMenu,
+  HomeProducts,
+  ResponsiveCategoriesMenu,
+} from "../components";
 
 const HomeContainer = () => {
   return (
-    <main className="grow p-3 flex w-full font-urbanist bg-[#fafafa] min-h-[85vh]">
-        <CategoriesMenu />
-        <HomeProducts />
+    <main className="grow p-3 flex md:flex-row flex-col w-full font-urbanist bg-[#fafafa] min-h-[85vh]">
+      <ResponsiveCategoriesMenu />
+      <CategoriesMenu />
+      <HomeProducts />
     </main>
   );
 };

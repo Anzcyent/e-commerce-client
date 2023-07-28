@@ -3,7 +3,7 @@ import { products } from "../utils/data";
 
 const HomeProducts = () => {
   return (
-    <section className="home-products md:w-5/6 w-full p-5 flex flex-wrap justify-evenly items-start overflow-y-auto gap-10">
+    <section className="vertical-scroll md:w-5/6 w-full p-5 flex flex-wrap justify-evenly items-start overflow-y-auto gap-10">
       {products.map((product) => (
         <div key={product.id} title={product.description} className="sm:w-[200px] w-[100px] sm:h-60 h-40 flex flex-col justify-evenly items-center border-2 border-darkBlue p-3 mr-5 hover-and-scale rounded-lg">
           <img className="w-30 sm:h-40 h-20 object-cover" src={product.image} alt={product.name} />
