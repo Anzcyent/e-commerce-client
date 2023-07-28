@@ -5,3 +5,5 @@ export { default as Footer } from "./Footer";
 export { default as CategoriesMenu } from "./CategoriesMenu";
 export { default as HomeProducts } from "./HomeProducts";
 export { default as Badge } from "./Badge";
+export { default as CartItem } from "./CartItem";
+export { default as CartSummary } from "./CartSummary";

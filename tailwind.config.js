@@ -12,7 +12,8 @@ export default {
       biceBlue: "#2D6A8B",
       white: "#fff",
       black: "#000",
-      yellow: "#ffd300"
+      yellow: "#ffd300",
+      tomato: "#ff6347"
     },
     screens: {
       ss: "340px",
