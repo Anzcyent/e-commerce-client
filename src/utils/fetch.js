@@ -1,42 +1,16 @@
-import axios from "axios";
+import { getData } from "./request";
+import {
+  getCategoriesStart,
+  getCategoriesSuccess,
+  getCategoriesError,
+} from "../redux/categorySlice";
 
-const urlStart = (url) =>
-  process.env.NODE_ENV === "development"
-    ? `http://localhost:5000${url}`
-    : null;
-
-export const getData = async (url, token) => {
-  const res = await axios.get(urlStart(url), {
-    headers: { Authorization: `Bearer:${token}}` },
-    withCredentials: true,
-  });
-
-  return res;
-};
-
-export const postData = async (url, data, token) => {
-  const res = await axios.post(urlStart(url), data, {
-    headers: { Authorization: `Bearer:${token}` },
-    withCredentials: true,
-  });
-
-  return res;
-};
-
-export const putData = async (url, data, token) => {
-  const res = await axios.put(urlStart(url), data, {
-    headers: { Authorization: `Bearer:${token}` },
-    withCredentials: true,
-  });
-
-  return res;
-};
-
-export const deleteData = async (url, token) => {
-  const res = await axios.delete(urlStart(url), {
-    headers: { Authorization: `Bearer:${token}` },
-    withCredentials: true,
-  });
-
-  return res;
+export const fetchCategories = () => async (dispatch) => {
+  try {
+    dispatch(getCategoriesStart());
+    const res = await getData("/category");
+    dispatch(getCategoriesSuccess(res.data.categories));
+  } catch (error) {
+    dispatch(getCategoriesError());
+  }
 };
