@@ -3,12 +3,14 @@ import { FcSearch } from "react-icons/fc";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { Badge } from "../components";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
   return (
     <nav className="w-full font-urbanist p-3 bg-darkBlue text-white flex items-center justify-evenly relative">
-      <h1 className="font-bold lg:w-1/6 w-1/2 flex justify-center sm:text-2xl text-lg">
+      <h1 onClick={() => navigate("/")} className="hover-and-scale font-bold lg:w-1/6 w-1/2 flex justify-center sm:text-2xl text-lg">
         ShopEazy
       </h1>
 
