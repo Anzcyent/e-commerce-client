@@ -1,14 +1,31 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../utils/fetch";
+import PuffLoader from "react-spinners/PuffLoader";
 
 const CategoriesMenu = () => {
-  const { categories } = useSelector((state) => state.categoryReducer);
+  const { categories, loading, error } = useSelector(
+    (state) => state.categoryReducer
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
+
+  if (loading)
+    return (
+      <section className="w-1/6 hidden md:flex flex-col min-h-[80vh] justify-center items-center">
+        <span>{error}</span>
+      </section>
+    );
+
+  if (error)
+    return (
+      <section className="w-1/6 hidden md:flex flex-col min-h-[80vh] justify-center items-center">
+        <PuffLoader color="#5d3ebc" />
+      </section>
+    );
 
   return (
     <section className="w-1/6 hidden md:flex flex-col min-h-[80vh]">

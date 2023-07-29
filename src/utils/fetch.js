@@ -11,6 +11,6 @@ export const fetchCategories = () => async (dispatch) => {
     const res = await getData("/category");
     dispatch(getCategoriesSuccess(res.data.categories));
   } catch (error) {
-    dispatch(getCategoriesError());
+    dispatch(getCategoriesError(error.response.data.message));
   }
 };
