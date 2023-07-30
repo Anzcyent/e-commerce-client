@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSingleProduct } from "../utils/fetch";
 import PuffLoader from "react-spinners/PuffLoader";
 
 const ProductContainer = () => {
+  const [quantityCounter, setQuantityCounter] = useState(1);
+
   const navigate = useNavigate();
   const { productShown, loading, error } = useSelector(
     (state) => state.productReducer
@@ -15,6 +17,20 @@ const ProductContainer = () => {
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
   }, [id]);
+
+  const handleQuantity = (op) => {
+    if (op === "+") {
+      if (quantityCounter < productShown.quantity) {
+        setQuantityCounter(quantityCounter + 1);
+      }
+    }
+
+    if (op === "-") {
+      if (quantityCounter > 1) {
+        setQuantityCounter(quantityCounter - 1);
+      }
+    }
+  };
 
   if (loading)
     return (
@@ -70,14 +86,27 @@ const ProductContainer = () => {
         {/* Quantity miktarı stock quantity'sini geçmeyecek */}
         <div className="md:w-1/2 w-full flex justify-between items-center border-2 p-3 mt-3 rounded-md">
           <div className="flex">
-            <span className="text-2xl mr-3 hover-and-scale text-lightBlue">
+            <span
+              className="text-2xl mr-3 hover-and-scale text-lightBlue"
+              onClick={() => handleQuantity("-")}
+            >
               -
             </span>
-            <span className="text-2xl mr-3 font-bold">1</span>
-            <span className="text-2xl hover-and-scale text-lightBlue">+</span>
+            <span className="text-2xl mr-3 font-bold">{quantityCounter}</span>
+            <span
+              className="text-2xl hover-and-scale text-lightBlue"
+              onClick={() => handleQuantity("+")}
+            >
+              +
+            </span>
           </div>
 
-          <span className="font-bold text-darkBlue md:text-2xl text-lg">${productShown.price}</span>
+          <span className="font-bold text-darkBlue md:text-2xl text-lg">
+            $
+            {quantityCounter > 1
+              ? Math.floor(productShown.price * quantityCounter)
+              : productShown.price}
+          </span>
 
           <button className="bg-darkBlue px-3 py-1 text-white font-bold hover-and-scale">
             Add To Cart
