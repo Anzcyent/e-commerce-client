@@ -68,7 +68,7 @@ const ProductContainer = () => {
         </span>
 
         {/* Quantity miktarı stock quantity'sini geçmeyecek */}
-        <div className="md:w-1/2 w-full flex justify-between border-2 p-3 mt-3 rounded-md">
+        <div className="md:w-1/2 w-full flex justify-between items-center border-2 p-3 mt-3 rounded-md">
           <div className="flex">
             <span className="text-2xl mr-3 hover-and-scale text-lightBlue">
               -
@@ -76,6 +76,8 @@ const ProductContainer = () => {
             <span className="text-2xl mr-3 font-bold">1</span>
             <span className="text-2xl hover-and-scale text-lightBlue">+</span>
           </div>
+
+          <span className="font-bold text-darkBlue md:text-2xl text-lg">${productShown.price}</span>
 
           <button className="bg-darkBlue px-3 py-1 text-white font-bold hover-and-scale">
             Add To Cart
