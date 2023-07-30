@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCategories } from "../utils/fetch";
+import { fetchCategories, fetchFilteredProducts } from "../utils/fetch";
 import PuffLoader from "react-spinners/PuffLoader";
 
 const CategoriesMenu = () => {
@@ -34,6 +34,7 @@ const CategoriesMenu = () => {
           className="bg-lightBlue mt-3 text-white p-2 rounded-lg hover-and-scale"
           title={category.description}
           key={category._id}
+          onClick={() => dispatch(fetchFilteredProducts(category._id))}
         >
           {category.name}
         </div>

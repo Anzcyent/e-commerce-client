@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCategories } from "../utils/fetch";
+import { fetchCategories, fetchFilteredProducts } from "../utils/fetch";
 import PuffLoader from "react-spinners/PuffLoader";
 
 const ResponsiveCategoryMenu = () => {
@@ -28,12 +28,13 @@ const ResponsiveCategoryMenu = () => {
     );
 
   return (
-    <section className="md:hidden flex overflow-x-auto overflow-y-hidden horizontal-scroll h-[50vh]">
+    <section className="md:hidden flex overflow-x-auto overflow-y-hidden horizontal-scroll h-[20vh]">
       {categories.map((category) => (
         <div
           className="bg-lightBlue text-white px-3 py-0 text-xs mr-2 rounded-lg hover-and-scale h-max-content flex justify-center items-center"
           title={category.description}
           key={category._id}
+          onClick={() => dispatch(fetchFilteredProducts(category._id))}
         >
           {category.name}
         </div>

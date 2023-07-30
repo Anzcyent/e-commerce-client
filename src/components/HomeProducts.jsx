@@ -6,7 +6,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 
 const HomeProducts = () => {
   const navigate = useNavigate();
-  const { products, loading, error } = useSelector(
+  const { products, filteredProducts, loading, error } = useSelector(
     (state) => state.productReducer
   );
   const dispatch = useDispatch();
@@ -14,6 +14,14 @@ const HomeProducts = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
+
+  let filter;
+
+  if (filteredProducts.length > 0) {
+    filter = filteredProducts;
+  } else {
+    filter = products;
+  }
 
   if (loading)
     return (
@@ -31,7 +39,7 @@ const HomeProducts = () => {
 
   return (
     <section className="vertical-scroll md:w-5/6 w-full p-5 flex flex-wrap justify-evenly items-start overflow-y-auto gap-10">
-      {products.map((product) => (
+      {filter.map((product) => (
         <div
           onClick={() => navigate(`/product/${product._id}`)}
           key={product._id}
@@ -51,6 +59,15 @@ const HomeProducts = () => {
           </span>
         </div>
       ))}
+
+      {filteredProducts.length > 0 && (
+        <button
+          onClick={() => dispatch(fetchProducts())}
+          className="bg-darkBlue text-white px-3 py-1 hover-and-scale self-center"
+        >
+          Reset Filter
+        </button>
+      )}
     </section>
   );
 };
