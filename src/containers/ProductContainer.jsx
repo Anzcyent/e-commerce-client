@@ -86,19 +86,19 @@ const ProductContainer = () => {
         {/* Quantity miktarı stock quantity'sini geçmeyecek */}
         <div className="md:w-1/2 w-full flex justify-between items-center border-2 p-3 mt-3 rounded-md">
           <div className="flex">
-            <span
+            <button
               className="text-2xl mr-3 hover-and-scale text-lightBlue"
               onClick={() => handleQuantity("-")}
             >
               -
-            </span>
+            </button>
             <span className="text-2xl mr-3 font-bold">{quantityCounter}</span>
-            <span
+            <button
               className="text-2xl hover-and-scale text-lightBlue"
               onClick={() => handleQuantity("+")}
             >
               +
-            </span>
+            </button>
           </div>
 
           <span className="font-bold text-darkBlue md:text-2xl text-lg">
