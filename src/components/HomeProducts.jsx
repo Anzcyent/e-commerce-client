@@ -1,9 +1,17 @@
-import React from "react";
-import { products } from "../utils/data";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../utils/fetch";
 
 const HomeProducts = () => {
   const navigate = useNavigate();
+  const { products } = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
   return (
     <section className="vertical-scroll md:w-5/6 w-full p-5 flex flex-wrap justify-evenly items-start overflow-y-auto gap-10">
       {products.map((product) => (
@@ -16,9 +24,9 @@ const HomeProducts = () => {
           <img
             className="w-30 sm:h-40 h-20 object-cover"
             src={product.image}
-            alt={product.name}
+            alt={product.title}
           />
-          <span className="font-bold sm:text-base text-xs">{product.name}</span>
+          <span className="font-bold sm:text-base text-xs">{product.title}</span>
           <span className="font-semibold text-lightBlue sm:text-base text-sm">
             ${product.price}
           </span>
