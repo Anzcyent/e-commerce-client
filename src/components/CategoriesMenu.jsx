@@ -16,14 +16,14 @@ const CategoriesMenu = () => {
   if (loading)
     return (
       <section className="w-1/6 hidden md:flex flex-col min-h-[80vh] justify-center items-center">
-        <span>{error}</span>
+        <PuffLoader color="#5d3ebc" />
       </section>
     );
 
   if (error)
     return (
       <section className="w-1/6 hidden md:flex flex-col min-h-[80vh] justify-center items-center">
-        <PuffLoader color="#5d3ebc" />
+        <span className="text-darkBlue font-bold">{error}</span>
       </section>
     );
 

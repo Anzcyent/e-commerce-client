@@ -8,6 +8,9 @@ import {
   getProductsStart,
   getProductsSuccess,
   getProductsError,
+  getProductStart,
+  getProductSuccess,
+  getProductError,
 } from "../redux/productSlice";
 
 export const fetchCategories = () => async (dispatch) => {
@@ -27,5 +30,15 @@ export const fetchProducts = () => async (dispatch) => {
     dispatch(getProductsSuccess(res.data.products));
   } catch (error) {
     dispatch(getProductsError(error.response.data.message));
+  }
+};
+
+export const fetchSingleProduct = (id) => async (dispatch) => {
+  try {
+    dispatch(getProductStart());
+    const res = await getData(`/product/${id}`);
+    dispatch(getProductSuccess(res.data.product));
+  } catch (error) {
+    dispatch(getProductError(error.response.data.message));
   }
 };
