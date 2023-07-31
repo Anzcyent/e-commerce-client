@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchSingleProduct } from "../utils/fetch";
+import {
+  fetchSingleProduct,
+  fetchCreateCart,
+  fetchUpdateCart,
+} from "../utils/fetch";
 import PuffLoader from "react-spinners/PuffLoader";
 
 const ProductContainer = () => {
   const [quantityCounter, setQuantityCounter] = useState(1);
 
+  const user = false;
+
   const navigate = useNavigate();
   const { productShown, loading, error } = useSelector(
     (state) => state.productReducer
   );
+  const { cart } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
   }, [id]);
+
+  console.log(cart);
 
   const handleQuantity = (op) => {
     if (op === "+") {
@@ -29,6 +38,32 @@ const ProductContainer = () => {
       if (quantityCounter > 1) {
         setQuantityCounter(quantityCounter - 1);
       }
+    }
+  };
+
+  const handleCreateCart = () => {
+    if (!localStorage.getItem("cartId")) {
+      dispatch(
+        fetchCreateCart({
+          product: {
+            ...productShown,
+            quantity: quantityCounter,
+            price: quantityCounter * productShown.price,
+          },
+          customer: user ? user._id : null,
+        })
+      );
+    } else {
+      dispatch(
+        fetchUpdateCart(localStorage.getItem("cartId"), {
+          product: {
+            ...productShown,
+            quantity: quantityCounter,
+            price: quantityCounter * productShown.price,
+          },
+          customer: user ? user._id : null,
+        })
+      );
     }
   };
 
@@ -83,7 +118,6 @@ const ProductContainer = () => {
           <span>by {productShown?.seller?.username}</span>
         </span>
 
-        {/* Quantity miktarı stock quantity'sini geçmeyecek */}
         <div className="md:w-1/2 w-full flex justify-between items-center border-2 p-3 mt-3 rounded-md">
           <div className="flex">
             <button
@@ -108,7 +142,10 @@ const ProductContainer = () => {
               : productShown.price}
           </span>
 
-          <button className="bg-darkBlue px-3 py-1 text-white font-bold hover-and-scale">
+          <button
+            onClick={handleCreateCart}
+            className="bg-darkBlue px-3 py-1 text-white font-bold hover-and-scale"
+          >
             Add To Cart
           </button>
         </div>

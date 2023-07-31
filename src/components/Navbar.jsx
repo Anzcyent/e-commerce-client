@@ -4,13 +4,19 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { Badge } from "../components";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
+
+  const { quantity } = useSelector((state) => state.cartReducer);
   return (
     <nav className="w-full font-urbanist p-3 bg-darkBlue text-white flex items-center justify-evenly relative">
-      <h1 onClick={() => navigate("/")} className="hover-and-scale font-bold lg:w-1/6 w-1/2 flex justify-center sm:text-2xl text-lg">
+      <h1
+        onClick={() => navigate("/")}
+        className="hover-and-scale font-bold lg:w-1/6 w-1/2 flex justify-center sm:text-2xl text-lg"
+      >
         ShopEazy
       </h1>
 
@@ -34,7 +40,7 @@ const Navbar = () => {
         </Link>
         <Link to="/cart" className="relative hover-and-scale">
           <AiOutlineShoppingCart />
-          <Badge>5</Badge>
+          <Badge>{quantity}</Badge>
         </Link>
       </div>
 
@@ -54,7 +60,7 @@ const Navbar = () => {
           </Link>
           <Link to="/cart" className="relative">
             <AiOutlineShoppingCart />
-            <Badge>5</Badge>
+            <Badge>{quantity}</Badge>
           </Link>
         </div>
       )}
