@@ -72,6 +72,7 @@ export const fetchCreateCart = (data) => async (dispatch) => {
     dispatch(createCartSuccess(res.data.cart));
   } catch (error) {
     dispatch(createCartError(error.response.data.message));
+    console.log(error.response.data.message);
   }
 };
 
@@ -79,7 +80,6 @@ export const fetchUpdateCart = (cartId, data) => async (dispatch) => {
   try {
     dispatch(updateCartStart());
     const res = await putData(`/cart/update/${cartId}`, data);
-    console.log(res.data);
     dispatch(updateCartSuccess(res.data.updatedCart));
   } catch (error) {
     dispatch(updateCartError(error.response.data.message));

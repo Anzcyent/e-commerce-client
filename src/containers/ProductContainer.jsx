@@ -17,15 +17,13 @@ const ProductContainer = () => {
   const { productShown, loading, error } = useSelector(
     (state) => state.productReducer
   );
-  const { cart } = useSelector((state) => state.cartReducer);
+  const { cart, total } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
   }, [id]);
-
-  console.log(cart);
 
   const handleQuantity = (op) => {
     if (op === "+") {
@@ -51,6 +49,7 @@ const ProductContainer = () => {
             price: quantityCounter * productShown.price,
           },
           customer: user ? user._id : null,
+          total: quantityCounter * productShown.price,
         })
       );
     } else {
@@ -62,10 +61,14 @@ const ProductContainer = () => {
             price: quantityCounter * productShown.price,
           },
           customer: user ? user._id : null,
+          total: quantityCounter * productShown.price,
         })
       );
     }
   };
+
+  console.log(cart);
+  console.log(total);
 
   if (loading)
     return (

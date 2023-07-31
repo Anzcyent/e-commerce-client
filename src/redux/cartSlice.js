@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cart: {},
   quantity: 0,
+  total: 0,
   loading: false,
   error: null,
 };
@@ -31,6 +32,7 @@ export const cartSlice = createSlice({
       state.loading = false;
       state.cart = action.payload;
       state.quantity = state.cart.products.length;
+      state.total = action.payload.total;
     },
     createCartError: (state, action) => {
       state.loading = false;
@@ -44,6 +46,7 @@ export const cartSlice = createSlice({
       state.loading = false;
       state.cart = action.payload;
       state.quantity = state.cart.products.length;
+      state.total = action.payload.total;
     },
     updateCartError: (state, action) => {
       state.loading = false;
