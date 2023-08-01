@@ -19,7 +19,7 @@ const CartContainer = () => {
     <main className="grow p-3 flex md:flex-row flex-col font-urbanist">
       <div className="md:w-1/2 w-full flex flex-col">
         {cart?.products?.map((product) => (
-          <CartItem key={product._id} product={product} />
+          <CartItem key={product._id} cartId={cart._id} product={product} />
         ))}
 
         <button

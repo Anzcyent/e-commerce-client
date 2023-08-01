@@ -54,6 +54,20 @@ export const cartSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // DELETE ITEM
+    deleteItemStart: (state, action) => {
+      state.loading = true;
+    },
+    deleteItemSuccess: (state, action) => {
+      state.loading = false;
+      state.cart = action.payload;
+      state.quantity = state.cart.products.length;
+      state.total = action.payload.total;
+    },
+    deleteItemError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -67,5 +81,8 @@ export const {
   updateCartStart,
   updateCartSuccess,
   updateCartError,
+  deleteItemStart,
+  deleteItemSuccess,
+  deleteItemError
 } = cartSlice.actions;
 export default cartSlice.reducer;

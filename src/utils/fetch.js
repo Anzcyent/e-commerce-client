@@ -1,4 +1,4 @@
-import { getData, postData, putData } from "./request";
+import { deleteData, getData, postData, putData } from "./request";
 import {
   getCategoriesStart,
   getCategoriesSuccess,
@@ -19,6 +19,9 @@ import {
   createCartError,
   createCartStart,
   createCartSuccess,
+  deleteItemError,
+  deleteItemStart,
+  deleteItemSuccess,
   getCartError,
   getCartStart,
   getCartSuccess,
@@ -98,3 +101,16 @@ export const fetchUpdateCart = (cartId, data) => async (dispatch) => {
     dispatch(updateCartError(error.response.data.message));
   }
 };
+
+export const fetchDeleteItemInCart =
+  (cartId, productId) => async (dispatch) => {
+    try {
+      dispatch(deleteItemStart());
+      const res = await deleteData(
+        `/cart/deleteItem/${cartId}?productId=${productId}`
+      );
+      dispatch(deleteItemSuccess(res.data.cart));
+    } catch (error) {
+      dispatch(deleteItemError(error.response.data.message));
+    }
+  };
