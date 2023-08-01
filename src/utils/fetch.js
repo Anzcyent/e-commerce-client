@@ -19,6 +19,9 @@ import {
   createCartError,
   createCartStart,
   createCartSuccess,
+  getCartError,
+  getCartStart,
+  getCartSuccess,
   updateCartError,
   updateCartStart,
   updateCartSuccess,
@@ -61,6 +64,16 @@ export const fetchSingleProduct = (id) => async (dispatch) => {
     dispatch(getProductSuccess(res.data.product));
   } catch (error) {
     dispatch(getProductError(error.response.data.message));
+  }
+};
+
+export const fetchCart = (cartId) => async (dispatch) => {
+  try {
+    dispatch(getCartStart());
+    const res = await getData(`/cart/${cartId}`);
+    dispatch(getCartSuccess(res.data.cart));
+  } catch (error) {
+    dispatch(getCartError(error.response.data.message));
   }
 };
 

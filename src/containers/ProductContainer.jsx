@@ -67,9 +67,6 @@ const ProductContainer = () => {
     }
   };
 
-  console.log(cart);
-  console.log(total);
-
   if (loading)
     return (
       <main className="grow p-3 flex flex-col justify-center items-center font-urbanist min-h-[90vh]">

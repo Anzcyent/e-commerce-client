@@ -19,6 +19,8 @@ export const cartSlice = createSlice({
     getCartSuccess: (state, action) => {
       state.loading = false;
       state.cart = action.payload;
+      state.quantity = state.cart.products.length;
+      state.total = action.payload.total;
     },
     getCartError: (state, action) => {
       state.loading = false;
