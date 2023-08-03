@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { Home, Login, Register, NotFound, Cart, Product } from "./pages";
+import { Home, Login, Register, NotFound, Cart, Product, Order } from "./pages";
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { fetchCart } from "./utils/fetch";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
+  const { order } = useSelector((state) => state.orderReducer);
+  console.log(order);
 
   const user = false;
   const cartId = localStorage.getItem("cartId");
@@ -29,6 +31,11 @@ const App = () => {
         exact
         path="/register"
         element={user ? <Navigate to="/" /> : <Register />}
+      />
+      <Route
+        exact
+        path="/order/:id"
+        element={<Order />}
       />
       <Route path="*" element={<NotFound />} />
     </Routes>

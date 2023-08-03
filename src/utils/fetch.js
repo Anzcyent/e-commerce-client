@@ -29,6 +29,11 @@ import {
   updateCartStart,
   updateCartSuccess,
 } from "../redux/cartSlice";
+import {
+  createOrderError,
+  createOrderStart,
+  createOrderSuccess,
+} from "../redux/orderSlice";
 
 export const fetchCategories = () => async (dispatch) => {
   try {
@@ -114,3 +119,14 @@ export const fetchDeleteItemInCart =
       dispatch(deleteItemError(error.response.data.message));
     }
   };
+
+export const fetchCreateOrder = (data) => async (dispatch) => {
+  try {
+    dispatch(createOrderStart());
+    const res = await postData("/order/create", data);
+    dispatch(createOrderSuccess(res.data.order));
+  } catch (error) {
+    console.log(error.response.data.message)
+    dispatch(createOrderError(error.response.data.message));
+  }
+};

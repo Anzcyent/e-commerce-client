@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-[100vw] h-[100vh] gradientBg flex justify-center items-center font-urbanist">
+    <main className="w-[100vw] h-[100vh] gradientBg flex justify-center items-center font-urbanist">
       <form className="sm:w-1/2 w-2/3 bg-white rounded-md p-3 flex flex-col">
         <div className="flex justify-between text-darkBlue text-2xl">
           <h1 className="font-bold ">REGISTER</h1>
@@ -47,7 +47,7 @@ const Register = () => {
           Sign In
         </button>
       </form>
-    </div>
+    </main>
   );
 };
 

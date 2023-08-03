@@ -31,7 +31,7 @@ const CartContainer = () => {
       </div>
 
       <div className="md:w-1/2 w-full">
-        <CartSummary total={total} />
+        <CartSummary cart={cart} total={total} />
       </div>
     </main>
   );
