@@ -3,6 +3,7 @@ import StripeCheckOut from "react-stripe-checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateOrder } from "../utils/fetch";
 import {useNavigate} from "react-router-dom"
+import { clearCart } from "../redux/cartSlice";
 
 const CartSummary = ({ cart, total }) => {
   const [stripeToken, setStripeToken] = useState(null);
@@ -34,7 +35,7 @@ const CartSummary = ({ cart, total }) => {
           customerName: user ? user.username : name,
           totalPrice: Math.floor(total) - (Math.floor(total) * discount) / 100,
           address: `${address_line1} ${
-            address_line2 && address_line2
+            address_line2 ? address_line2 : ""
           } ${address_city}/${address_country} ${address_zip}`,
           status: "OK",
           cart: cartId,
@@ -43,6 +44,7 @@ const CartSummary = ({ cart, total }) => {
       );
 
       localStorage.removeItem("cartId");
+      dispatch(clearCart());
       navigate(`/order/${order._id}`)
     }
   }, [stripeToken]);

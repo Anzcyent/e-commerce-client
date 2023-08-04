@@ -68,6 +68,13 @@ export const cartSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    clearCart: (state, action) => {
+      state.cart = {}
+      state.quantity = 0
+      state.total = 0
+      state.loading = false
+      state.error = null
+    }
   },
 });
 
@@ -83,6 +90,7 @@ export const {
   updateCartError,
   deleteItemStart,
   deleteItemSuccess,
-  deleteItemError
+  deleteItemError,
+  clearCart
 } = cartSlice.actions;
 export default cartSlice.reducer;
