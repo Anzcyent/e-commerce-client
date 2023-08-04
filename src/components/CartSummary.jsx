@@ -59,8 +59,9 @@ const CartSummary = ({ cart, total }) => {
           Discount:{" "}
           <span className="font-bold text-lightBlue">{discount}%</span>
         </span>
-        <span className="mb-5">
+        <span className="mb-5 relative">
           Total:{" "}
+          <span className="opacity-50 font-bold absolute right-[-50%] line-through">${Math.round(total)}</span>
           <span className="text-darkBlue font-bold">
             ${Math.round(total) - (Math.round(total) * discount) / 100}
           </span>
@@ -84,7 +85,7 @@ const CartSummary = ({ cart, total }) => {
             onClick={() =>
               alert("You can enter 4242 4242 4242 4242 03/28 CVC:123 for testing")
             }
-            className="bg-darkBlue text-white px-3 py-1 hover-and-scale"
+            className="bg-darkBlue text-white px-3 py-1 hover-and-scale md:text-2xl text-sm"
           >
             CHECKOUT NOW
           </button>
