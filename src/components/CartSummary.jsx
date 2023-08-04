@@ -40,7 +40,7 @@ const CartSummary = ({ cart, total }) => {
           status: "OK",
           cart: cartId,
           products: cart.products
-        })
+        }, navigate)
       );
 
       localStorage.removeItem("cartId");

@@ -33,6 +33,9 @@ import {
   createOrderError,
   createOrderStart,
   createOrderSuccess,
+  getOrderError,
+  getOrderStart,
+  getOrderSuccess,
 } from "../redux/orderSlice";
 
 export const fetchCategories = () => async (dispatch) => {
@@ -120,13 +123,23 @@ export const fetchDeleteItemInCart =
     }
   };
 
-export const fetchCreateOrder = (data) => async (dispatch) => {
+export const fetchCreateOrder = (data, navigate) => async (dispatch) => {
   try {
     dispatch(createOrderStart());
     const res = await postData("/order/create", data);
     dispatch(createOrderSuccess(res.data.order));
+    navigate(`/order/${res.data.order._id}`)
   } catch (error) {
-    console.log(error.response.data.message)
     dispatch(createOrderError(error.response.data.message));
+  }
+};
+
+export const fetchOrder = (orderId) => async (dispatch) => {
+  try {
+    dispatch(getOrderStart());
+    const res = await getData(`/order/${orderId}`);
+    dispatch(getOrderSuccess(res.data.order));
+  } catch (error) {
+    dispatch(getOrderError(error.response.data.message));
   }
 };

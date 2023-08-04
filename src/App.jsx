@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
   const { order } = useSelector((state) => state.orderReducer);
-  console.log(order);
 
   const user = false;
   const cartId = localStorage.getItem("cartId");
