@@ -18,7 +18,7 @@ const CartItem = ({ cartId, product }) => {
           <span>
             Quantity: <span className="font-bold">{product.quantity}</span>
           </span>
-          <span className="text-darkBlue font-bold">${product.price}</span>
+          <span className="text-darkBlue font-bold">${Math.round(product.price)}</span>
           <button
             onClick={() => dispatch(fetchDeleteItemInCart(cartId, product._id))}
             className="hover-and-scale w-[40px] p-1 flex justify-center items-center"

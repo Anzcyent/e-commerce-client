@@ -11,11 +11,7 @@ const OrderContainer = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id === order._id) dispatch(fetchOrder(id));
-  }, [order._id]);
-
-  useEffect(() => {
-     dispatch(fetchOrder(id));
+    dispatch(fetchOrder(id));
   }, [id]);
 
   if (error)

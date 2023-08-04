@@ -21,6 +21,7 @@ export const orderSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // GET ORDER
     getOrderStart: (state, action) => {
       state.loading = true;
     },

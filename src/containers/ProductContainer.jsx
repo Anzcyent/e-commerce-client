@@ -10,6 +10,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 
 const ProductContainer = () => {
   const [quantityCounter, setQuantityCounter] = useState(1);
+  const [disableButton, setDisableButton] = useState(false);
 
   const user = false;
 
@@ -17,9 +18,15 @@ const ProductContainer = () => {
   const { productShown, loading, error } = useSelector(
     (state) => state.productReducer
   );
-  const { cart, total } = useSelector((state) => state.cartReducer);
+  const { cart } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  useEffect(() => {
+   cart?.products?.map(product => {
+      if (product._id == id) setDisableButton(true)
+    })
+  }, [cart]);
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
@@ -144,7 +151,9 @@ const ProductContainer = () => {
 
           <button
             onClick={handleCreateCart}
-            className="bg-darkBlue px-3 py-1 text-white font-bold hover-and-scale"
+            className="bg-darkBlue px-3 py-1 text-white font-bold hover-and-scale disabled:bg-black disabled:cursor-not-allowed"
+            disabled={disableButton}
+            title={disableButton ? "The product is already in cart" : undefined}
           >
             Add To Cart
           </button>

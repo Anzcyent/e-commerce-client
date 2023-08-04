@@ -33,7 +33,7 @@ const CartSummary = ({ cart, total }) => {
         fetchCreateOrder({
           customerId: user ? user : null,
           customerName: user ? user.username : name,
-          totalPrice: Math.floor(total) - (Math.floor(total) * discount) / 100,
+          totalPrice: Math.round(total) - (Math.round(total) * discount) / 100,
           address: `${address_line1} ${
             address_line2 ? address_line2 : ""
           } ${address_city}/${address_country} ${address_zip}`,
@@ -45,7 +45,6 @@ const CartSummary = ({ cart, total }) => {
 
       localStorage.removeItem("cartId");
       dispatch(clearCart());
-      navigate(`/order/${order._id}`)
     }
   }, [stripeToken]);
 
@@ -63,7 +62,7 @@ const CartSummary = ({ cart, total }) => {
         <span className="mb-5">
           Total:{" "}
           <span className="text-darkBlue font-bold">
-            ${Math.floor(total) - (Math.floor(total) * discount) / 100}
+            ${Math.round(total) - (Math.round(total) * discount) / 100}
           </span>
         </span>
 
@@ -73,10 +72,10 @@ const CartSummary = ({ cart, total }) => {
           billingAddress
           shippingAddress
           description={`Your total is $${
-            Math.floor(total) - (Math.floor(total) * discount) / 100
+            Math.round(total) - (Math.round(total) * discount) / 100
           }`}
           amount={
-            (Math.floor(total) - (Math.floor(total) * discount) / 100) * 100
+            (Math.round(total) - (Math.round(total) * discount) / 100) * 100
           }
           token={onToken}
           stripeKey="pk_test_51NUTNoHBvpeGrdzgigkOVnUi6rg8IzthW3dwQgEYsWClcRFi9W2LEUMGRiawA7G8YqU3eNxeoA6uqAKjg3D57Mmk00nfsfHDWO"
