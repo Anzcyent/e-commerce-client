@@ -29,8 +29,11 @@ const OrderContainer = () => {
     );
 
   return (
-    <section className="font-urbanist p-3 grow flex justify-center items-center min-h-[50vh]">
+    <section className="font-urbanist p-3 grow flex justify-center items-center min-h-[60vh]">
       <div className="flex flex-col border-2 p-3 rounded-md shadow-lg">
+        <span className="tracking-wide mb-5">
+          <span className="font-bold text-darkBlue">Order ID:</span> {order._id}
+        </span>
         <span className="tracking-wide mb-5">
           <span className="font-bold text-darkBlue">Customer ID:</span>{" "}
           {order.customerId
