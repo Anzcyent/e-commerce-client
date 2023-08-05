@@ -5,6 +5,7 @@ import cartReducer from "./cartSlice";
 import orderReducer from "./orderSlice";
 import authReducer from "./authSlice";
 import searchReducer from "./searchSlice";
+import toastReducer from "./toastSlice";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -23,6 +24,7 @@ export const store = configureStore({
     cartReducer,
     orderReducer,
     searchReducer,
+    toastReducer,
     authReducer: persistedReducer,
   },
   middleware: [thunk],
