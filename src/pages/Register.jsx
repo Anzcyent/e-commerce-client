@@ -23,7 +23,9 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(fetchRegister(data));
+    if (data.password === data.confirmPassword) {
+      dispatch(fetchRegister(data));
+    }
   };
 
   return (
@@ -75,9 +77,20 @@ const Register = () => {
           />
         </div>
 
+        {data.password !== data.confirmPassword && (
+          <small className="text-center text-tomato">
+            Passwords don't match
+          </small>
+        )}
+
         <small className="text-center">
           Already have an account?{" "}
-          <span className="text-lightBlue hover-and-scale" onClick={() => navigate("/login")}>Login</span>
+          <span
+            className="text-lightBlue hover-and-scale"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </span>
         </small>
 
         <button className="bg-lightBlue self-center text-white sm:p-3 p-2 mt-5 hover-and-scale">
