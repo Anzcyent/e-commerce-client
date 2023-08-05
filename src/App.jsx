@@ -14,6 +14,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { fetchCart } from "./utils/fetch";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import { resetToast } from "./redux/toastSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,8 @@ const App = () => {
   useEffect(() => {
     if (notify) {
       toast(toastMessage);
+
+      setTimeout(() => dispatch(resetToast()), 1000);
     }
   }, [notify]);
 

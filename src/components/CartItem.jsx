@@ -2,6 +2,7 @@ import React from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { fetchDeleteItemInCart } from "../utils/fetch";
+import { showNotify } from "../redux/toastSlice";
 
 const CartItem = ({ cartId, product }) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const CartItem = ({ cartId, product }) => {
             onClick={() => dispatch(fetchDeleteItemInCart(cartId, product._id))}
             className="hover-and-scale w-[40px] p-1 flex justify-center items-center"
           >
-            <BsFillTrashFill className="text-tomato mt-2 text-2xl" />
+            <BsFillTrashFill onClick={() => dispatch(showNotify(`${product.title} has been removed from the cart.`))} className="text-tomato mt-2 text-2xl" />
           </button>
         </div>
       </div>

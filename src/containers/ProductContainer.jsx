@@ -7,6 +7,7 @@ import {
   fetchUpdateCart,
 } from "../utils/fetch";
 import PuffLoader from "react-spinners/PuffLoader";
+import { showNotify } from "../redux/toastSlice";
 
 const ProductContainer = () => {
   const [quantityCounter, setQuantityCounter] = useState(1);
@@ -23,9 +24,9 @@ const ProductContainer = () => {
   const { id } = useParams();
 
   useEffect(() => {
-   cart?.products?.map(product => {
-      if (product._id == id) setDisableButton(true)
-    })
+    cart?.products?.map((product) => {
+      if (product._id == id) setDisableButton(true);
+    });
   }, [cart]);
 
   useEffect(() => {
@@ -59,6 +60,8 @@ const ProductContainer = () => {
           total: quantityCounter * productShown.price,
         })
       );
+
+      dispatch(showNotify(`${productShown.title} has been added to cart.`));
     } else {
       dispatch(
         fetchUpdateCart(localStorage.getItem("cartId"), {
@@ -71,6 +74,8 @@ const ProductContainer = () => {
           total: quantityCounter * productShown.price,
         })
       );
+
+      dispatch(showNotify(`${productShown.title} has been added to cart.`));
     }
   };
 
