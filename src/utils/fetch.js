@@ -139,6 +139,7 @@ export const fetchCreateOrder = (data, navigate) => async (dispatch) => {
     dispatch(createOrderStart());
     const res = await postData("/order/create", data);
     dispatch(createOrderSuccess(res.data.order));
+    console.log(res.data)
     navigate(`/order/${res.data.order._id}`);
   } catch (error) {
     dispatch(createOrderError(error.response.data.message));

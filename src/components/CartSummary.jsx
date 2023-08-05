@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import StripeCheckOut from "react-stripe-checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateOrder } from "../utils/fetch";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cartSlice";
 
 const CartSummary = ({ cart, total }) => {
   const [stripeToken, setStripeToken] = useState(null);
   const dispatch = useDispatch();
 
-  const user = false;
+  const {user} = useSelector((state) => state.authReducer);
   const cartId = localStorage.getItem("cartId");
   const navigate = useNavigate();
-
-  const {order} = useSelector(state => state.orderReducer);
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -27,20 +25,24 @@ const CartSummary = ({ cart, total }) => {
         address_city,
         address_country,
         address_zip,
-        name
+        name,
       } = stripeToken.card;
       dispatch(
-        fetchCreateOrder({
-          customerId: user ? user : null,
-          customerName: user ? user.username : name,
-          totalPrice: Math.round(total) - (Math.round(total) * discount) / 100,
-          address: `${address_line1} ${
-            address_line2 ? address_line2 : ""
-          } ${address_city}/${address_country} ${address_zip}`,
-          status: "OK",
-          cart: cartId,
-          products: cart.products
-        }, navigate)
+        fetchCreateOrder(
+          {
+            customerId: user._id ? user._id : undefined,
+            customerName: user._id ? user.username : name,
+            totalPrice:
+              Math.round(total) - (Math.round(total) * discount) / 100,
+            address: `${address_line1} ${
+              address_line2 ? address_line2 : ""
+            } ${address_city}/${address_country} ${address_zip}`,
+            status: "OK",
+            cart: cartId,
+            products: cart.products,
+          },
+          navigate
+        )
       );
 
       localStorage.removeItem("cartId");
@@ -61,7 +63,9 @@ const CartSummary = ({ cart, total }) => {
         </span>
         <span className="mb-5 relative">
           Total:{" "}
-          <span className="opacity-50 font-bold absolute right-[-50%] line-through">${Math.round(total)}</span>
+          <span className="opacity-50 font-bold absolute right-[-50%] line-through">
+            ${Math.round(total)}
+          </span>
           <span className="text-darkBlue font-bold">
             ${Math.round(total) - (Math.round(total) * discount) / 100}
           </span>
@@ -83,7 +87,9 @@ const CartSummary = ({ cart, total }) => {
         >
           <button
             onClick={() =>
-              alert("You can enter 4242 4242 4242 4242 03/28 CVC:123 for testing")
+              alert(
+                "You can enter 4242 4242 4242 4242 03/28 CVC:123 for testing"
+              )
             }
             className="bg-darkBlue text-white px-3 py-1 hover-and-scale md:text-2xl text-sm"
           >
