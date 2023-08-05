@@ -63,7 +63,7 @@ const HomeProducts = () => {
       {filteredProducts.length > 0 && (
         <button
           onClick={() => dispatch(fetchProducts())}
-          className="bg-darkBlue text-white px-3 py-1 hover-and-scale self-center absolute bottom-20"
+          className="bg-darkBlue text-white px-3 py-1 hover-and-scale self-center absolute bottom-0"
         >
           Reset Filter
         </button>
