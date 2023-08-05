@@ -1,27 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FcSearch } from "react-icons/fc";
 import {
   AiOutlineMenu,
   AiOutlineShoppingCart,
   AiOutlineLogout,
 } from "react-icons/ai";
-import { Badge } from "../components";
+import { Badge, SearchResults } from "../components";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLogout } from "../utils/fetch";
+import { fetchLogout, fetchSearch } from "../utils/fetch";
+import { closeSearch } from "../redux/searchSlice";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [query, setQuery] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { quantity } = useSelector((state) => state.cartReducer);
   const { user } = useSelector((state) => state.authReducer);
+  const { searchOpen } = useSelector((state) => state.searchReducer);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value)  ;
+  };
+
+  useEffect(() => {
+    if (query === "") {
+      dispatch(closeSearch());
+    } else {
+      dispatch(fetchSearch(query));
+    }
+  }, [query]);
 
   return (
     <nav className="w-full font-urbanist p-3 bg-darkBlue text-white flex items-center justify-evenly relative">
+      {searchOpen && <SearchResults />}
       <h1
         onClick={() => navigate("/")}
         className="hover-and-scale font-bold lg:w-1/6 w-1/2 flex justify-center sm:text-2xl text-lg"
@@ -34,6 +50,7 @@ const Navbar = () => {
           type="text"
           className="w-2/3 outline-0 p-2"
           placeholder="Search..."
+          onChange={handleChange}
         />
         <button className="p-2 text-2xl bg-yellow hover-and-scale">
           <FcSearch />
@@ -42,7 +59,12 @@ const Navbar = () => {
 
       {user._id ? (
         <div className="lg:flex hidden w-1/6 justify-center items-center">
-          <span className="mr-5 hover-and-scale" onClick={() => navigate("/orders")}>@{user.username}</span>
+          <span
+            className="mr-5 hover-and-scale"
+            onClick={() => navigate("/orders")}
+          >
+            @{user.username}
+          </span>
           <AiOutlineLogout
             onClick={() => dispatch(fetchLogout())}
             title="logout"
@@ -76,7 +98,12 @@ const Navbar = () => {
       {/* RESPONSIVE MENU */}
       {openMenu && user._id ? (
         <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col justify-center items-center font-bold p-3 text-sm flip z-20">
-          <span className="mb-5 hover-and-scale" onClick={() => navigate("/orders")}>@{user.username}</span>
+          <span
+            className="mb-5 hover-and-scale"
+            onClick={() => navigate("/orders")}
+          >
+            @{user.username}
+          </span>
           <AiOutlineLogout
             onClick={() => dispatch(fetchLogout())}
             title="logout"
@@ -87,19 +114,22 @@ const Navbar = () => {
             <Badge>{quantity}</Badge>
           </Link>
         </div>
-      ) : openMenu && !user._id && (
-        <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col justify-center items-center font-bold p-3 text-sm flip z-20">
-          <Link to="/register" className="mb-5 hover-and-scale">
-            REGISTER
-          </Link>
-          <Link to="/login" className="mb-5 hover-and-scale">
-            LOGIN
-          </Link>
-          <Link to="/cart" className="relative">
-            <AiOutlineShoppingCart />
-            <Badge>{quantity}</Badge>
-          </Link>
-        </div>
+      ) : (
+        openMenu &&
+        !user._id && (
+          <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col justify-center items-center font-bold p-3 text-sm flip z-20">
+            <Link to="/register" className="mb-5 hover-and-scale">
+              REGISTER
+            </Link>
+            <Link to="/login" className="mb-5 hover-and-scale">
+              LOGIN
+            </Link>
+            <Link to="/cart" className="relative">
+              <AiOutlineShoppingCart />
+              <Badge>{quantity}</Badge>
+            </Link>
+          </div>
+        )
       )}
     </nav>
   );

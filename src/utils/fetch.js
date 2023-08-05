@@ -51,6 +51,7 @@ import {
   registerStart,
   registerSuccess,
 } from "../redux/authSlice";
+import { searchError, searchStart, searchSuccess } from "../redux/searchSlice";
 
 export const fetchCategories = () => async (dispatch) => {
   try {
@@ -197,5 +198,15 @@ export const fetchLogout = () => async (dispatch) => {
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutError(error.response.data.message));
+  }
+};
+
+export const fetchSearch = (query) => async (dispatch) => {
+  try {
+    dispatch(searchStart());
+    const res = await getData(`/app/search?query=${query}`);
+    dispatch(searchSuccess(res.data.products));
+  } catch (error) {
+    dispatch(searchError());
   }
 };
