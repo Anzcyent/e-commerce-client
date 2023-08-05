@@ -38,6 +38,9 @@ import {
   getOrderSuccess,
 } from "../redux/orderSlice";
 import {
+  logoutError,
+  logoutStart,
+  logoutSuccess,
   registerError,
   registerStart,
   registerSuccess,
@@ -158,3 +161,14 @@ export const fetchRegister = (data) => async (dispatch) => {
     dispatch(registerError(error.response.data.message));
   }
 };
+
+export const fetchLogout = () => async (dispatch) => {
+  try {
+    dispatch(logoutStart());
+    const res = await getData("/auth/logout");
+    dispatch(logoutSuccess());
+  } catch (error) {
+    dispatch(logoutError(error.response.data.message));
+  }
+};
+
