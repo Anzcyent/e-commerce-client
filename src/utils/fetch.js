@@ -37,6 +37,11 @@ import {
   getOrderStart,
   getOrderSuccess,
 } from "../redux/orderSlice";
+import {
+  registerError,
+  registerStart,
+  registerSuccess,
+} from "../redux/authSlice";
 
 export const fetchCategories = () => async (dispatch) => {
   try {
@@ -128,7 +133,7 @@ export const fetchCreateOrder = (data, navigate) => async (dispatch) => {
     dispatch(createOrderStart());
     const res = await postData("/order/create", data);
     dispatch(createOrderSuccess(res.data.order));
-    navigate(`/order/${res.data.order._id}`)
+    navigate(`/order/${res.data.order._id}`);
   } catch (error) {
     dispatch(createOrderError(error.response.data.message));
   }
@@ -141,5 +146,15 @@ export const fetchOrder = (orderId) => async (dispatch) => {
     dispatch(getOrderSuccess(res.data.order));
   } catch (error) {
     dispatch(getOrderError(error.response.data.message));
+  }
+};
+
+export const fetchRegister = (data) => async (dispatch) => {
+  try {
+    dispatch(registerStart());
+    const res = await postData("/auth/register", data);
+    dispatch(registerSuccess(res.data));
+  } catch (error) {
+    dispatch(registerError(error.response.data.message));
   }
 };

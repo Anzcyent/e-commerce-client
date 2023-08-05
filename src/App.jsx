@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { order } = useSelector((state) => state.orderReducer);
 
-  const user = false;
+  const {user} = useSelector((state) => state.authReducer);
+
   const cartId = localStorage.getItem("cartId");
 
   useEffect(() => {
@@ -24,18 +24,14 @@ const App = () => {
       <Route
         exact
         path="/login"
-        element={user ? <Navigate to="/" /> : <Login />}
+        element={user._id ? <Navigate to="/" /> : <Login />}
       />
       <Route
         exact
         path="/register"
-        element={user ? <Navigate to="/" /> : <Register />}
+        element={user._id ? <Navigate to="/" /> : <Register />}
       />
-      <Route
-        exact
-        path="/order/:id"
-        element={<Order />}
-      />
+      <Route exact path="/order/:id" element={<Order />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

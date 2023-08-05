@@ -3,16 +3,28 @@ import categoryReducer from "./categorySlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 import orderReducer from "./orderSlice";
+import authReducer from "./authSlice";
 import thunk from "redux-thunk";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
 
-const store = configureStore({
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, authReducer);
+
+export const store = configureStore({
   reducer: {
     categoryReducer,
     productReducer,
     cartReducer,
     orderReducer,
+    authReducer: persistedReducer,
   },
   middleware: [thunk],
 });
 
-export default store;
+export const persistor = persistStore(store);
+
