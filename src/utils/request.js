@@ -3,7 +3,7 @@ import axios from "axios";
 const urlStart = (url) =>
   process.env.NODE_ENV === "development"
     ? `http://localhost:5000/api${url}`
-    : null;
+    : `https://shopeazy-server.onrender.com/api${url}`;
 
 export const getData = async (url, token) => {
   const res = await axios.get(urlStart(url), {
