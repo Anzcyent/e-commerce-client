@@ -24,6 +24,19 @@ export const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // login
+    loginStart: (state, action) => {
+      state.loading = true;
+    },
+    loginSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.payload.user;
+      state.accessToken = action.payload.access_token;
+    },
+    loginError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     // logout
     logoutStart: (state, action) => {
       state.loading = true;
@@ -44,6 +57,9 @@ export const {
   registerStart,
   registerSuccess,
   registerError,
+  loginStart,
+  loginSuccess,
+  loginError,
   logoutStart,
   logoutSuccess,
   logoutError,
