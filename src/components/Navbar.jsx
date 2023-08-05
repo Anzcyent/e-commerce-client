@@ -42,7 +42,7 @@ const Navbar = () => {
 
       {user._id ? (
         <div className="lg:flex hidden w-1/6 justify-center items-center">
-          <span className="mr-5">@{user.username}</span>
+          <span className="mr-5 hover-and-scale" onClick={() => navigate("/orders")}>@{user.username}</span>
           <AiOutlineLogout
             onClick={() => dispatch(fetchLogout())}
             title="logout"
@@ -76,7 +76,7 @@ const Navbar = () => {
       {/* RESPONSIVE MENU */}
       {openMenu && user._id ? (
         <div className="lg:hidden absolute bg-lightBlue right-0 top-[100%] w-1/2 h-[40vh] flex flex-col justify-center items-center font-bold p-3 text-sm flip z-20">
-          <span className="mb-5">@{user.username}</span>
+          <span className="mb-5 hover-and-scale" onClick={() => navigate("/orders")}>@{user.username}</span>
           <AiOutlineLogout
             onClick={() => dispatch(fetchLogout())}
             title="logout"

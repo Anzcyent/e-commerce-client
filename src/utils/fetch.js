@@ -36,6 +36,9 @@ import {
   getOrderError,
   getOrderStart,
   getOrderSuccess,
+  getUserOrdersError,
+  getUserOrdersStart,
+  getUserOrdersSuccess,
 } from "../redux/orderSlice";
 import {
   loginError,
@@ -139,7 +142,7 @@ export const fetchCreateOrder = (data, navigate) => async (dispatch) => {
     dispatch(createOrderStart());
     const res = await postData("/order/create", data);
     dispatch(createOrderSuccess(res.data.order));
-    console.log(res.data)
+    console.log(res.data);
     navigate(`/order/${res.data.order._id}`);
   } catch (error) {
     dispatch(createOrderError(error.response.data.message));
@@ -153,6 +156,17 @@ export const fetchOrder = (orderId) => async (dispatch) => {
     dispatch(getOrderSuccess(res.data.order));
   } catch (error) {
     dispatch(getOrderError(error.response.data.message));
+  }
+};
+
+export const fetchUserOrders = (userId, token) => async (dispatch) => {
+  try {
+    dispatch(getUserOrdersStart());
+    const res = await getData(`/order/userOrders/${userId}`, token);
+    dispatch(getUserOrdersSuccess(res.data.orders));
+  } catch (error) {
+    console.log(error.response.data.message);
+    dispatch(getUserOrdersError(error.response.data.message));
   }
 };
 

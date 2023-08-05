@@ -7,7 +7,7 @@ const urlStart = (url) =>
 
 export const getData = async (url, token) => {
   const res = await axios.get(urlStart(url), {
-    headers: { Authorization: `Bearer:${token}}` },
+    headers: { Authorization: `Bearer:${token}` },
     withCredentials: true,
   });
 

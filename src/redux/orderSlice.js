@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   order: {},
+  orders: [],
   loading: false,
   error: null,
 };
@@ -33,6 +34,18 @@ export const orderSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // GET USER ORDERS
+    getUserOrdersStart: (state, action) => {
+      state.loading = true;
+    },
+    getUserOrdersSuccess: (state, action) => {
+      state.loading = false;
+      state.orders = action.payload;
+    },
+    getUserOrdersError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -43,5 +56,8 @@ export const {
   getOrderStart,
   getOrderSuccess,
   getOrderError,
+  getUserOrdersStart,
+  getUserOrdersSuccess,
+  getUserOrdersError,
 } = orderSlice.actions;
 export default orderSlice.reducer;
